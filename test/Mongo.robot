@@ -2,8 +2,9 @@
 Resource                ../Resources/Common.robot
 Suite Setup             Setup Browser
 Suite Teardown          End suite
-Library           MongoDBLibrary
+Library               MongoDB
 
+Library            
 *** Variables ***
 ${MDBHost}        localhost
 ${MDBPort}        ${52010}
