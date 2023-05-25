@@ -7,7 +7,7 @@ Library               MongoDB
 Library            
 *** Variables ***
 ${MDBHost}        localhost
-${MDBPort}        ${52010}
+${MDBPort}        ${27017}
 
 *** Test Cases ***
 Connect-Disconnect
