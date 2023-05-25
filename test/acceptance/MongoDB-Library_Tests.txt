@@ -1,4 +1,7 @@
 *** Settings ***
+Resource                ../Resources/Comomn.robot
+Suite Setup             Setup Browser
+Suite Teardown          End suite
 Library           MongoDBLibrary
 
 *** Variables ***
