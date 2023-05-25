@@ -2,7 +2,7 @@
 Resource                ../Resources/Common.robot
 Suite Setup             Setup Browser
 Suite Teardown          End suite
-Library               MongoDB
+Library               MongoDBLibrary
 
 Library            
 *** Variables ***
