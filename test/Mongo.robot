@@ -12,6 +12,7 @@ ${MDBPort}        ${52010}
 *** Test Cases ***
 Connect-Disconnect
     [Tags]    regression
+    Appstate    Home
     Comment    Connect to MongoDB Server
     Connect To MongoDB    ${MDBHost}    ${MDBPort}
     Comment    Disconnect from MongoDB Server
