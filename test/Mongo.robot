@@ -1,9 +1,10 @@
 *** Settings ***
-Resource                        ../Resources/Common.robot
-Suite Setup                     Setup Browser
+Library                         QForce
+Library                         QWeb
+Library                        QVision
 Suite Teardown                  End suite
 Library                         MongoDBLibrary
-
+Suite Setup        OpenBrowser    about:blank    chrome
 
 Library
 *** Variables ***
@@ -13,7 +14,6 @@ ${MDBPort}                      ${27017}
 *** Test Cases ***
 Connect-Disconnect
     [Tags]                      regression
-    Appstate                    Home
     Comment                     Connect to MongoDB Server
     Connect To MongoDB          mongodb://admin:admin@foo.bar.org                       ${27017}
     Connect To MongoDB          foo.bar.org |               ${27017}
@@ -24,7 +24,7 @@ Connect-Disconnect
 Get MongoDB Databases
     [Tags]                      regression
     Comment
-    Connect To MongoDB               ${MDBHost}                  ${MDBPort}
+    Connect To MongoDB          ${MDBHost}                  ${MDBPort}
     Comment                     Retrieve a list of databases on the MongoDB server
     @{output} =                 Get MongoDB Databases
     Log Many                    @{output}
@@ -48,18 +48,18 @@ Save MongoDB Records
     Comment                     Connect to MongoDB Server
     Connect To MongoDB          ${MDBHost}                  ${MDBPort}
     Comment                     Get current record count in collection to ensure that count increases correctly
-    ${CurCount} =               Get MongoDB Collection Count                            ${MDBDB}      ${MDBColl}
-    ${output} =                 Save MongoDB Records        ${MDBDB}                    ${MDBColl}    {"timestamp":1, "msg":"Hello 1"}
+    ${CurCount} =               Get MongoDB Collection Count                            ${MDBDB}               ${MDBColl}
+    ${output} =                 Save MongoDB Records        ${MDBDB}                    ${MDBColl}             {"timestamp":1, "msg":"Hello 1"}
     Log                         ${output}
     Set Suite Variable          ${recordno1}                ${output}
-    ${output} =                 Save MongoDB Records        ${MDBDB}                    ${MDBColl}    {"timestamp":2, "msg":"Hello 2"}
+    ${output} =                 Save MongoDB Records        ${MDBDB}                    ${MDBColl}             {"timestamp":2, "msg":"Hello 2"}
     Log                         ${output}
     Set Suite Variable          ${recordno2}                ${output}
-    ${output} =                 Save MongoDB Records        ${MDBDB}                    ${MDBColl}    {"timestamp":3, "msg":"Hello 3"}
+    ${output} =                 Save MongoDB Records        ${MDBDB}                    ${MDBColl}             {"timestamp":3, "msg":"Hello 3"}
     Log                         ${output}
     Set Suite Variable          ${recordno3}                ${output}
     Comment                     Verify that the record count increased by the number of records saved above (3)
-    ${output} =                 Get MongoDB Collection Count                            ${MDBDB}      ${MDBColl}
+    ${output} =                 Get MongoDB Collection Count                            ${MDBDB}               ${MDBColl}
     Should Be Equal             ${output}                   ${${CurCount} + 3}
     Disconnect From MongoDB
 
@@ -70,18 +70,18 @@ Update An Existing MongoDB Record
     Comment                     Connect to MongoDB Server
     Connect To MongoDB          ${MDBHost}                  ${MDBPort}
     Comment                     Get current record count in collection to ensure that count increases correctly
-    ${CurCount} =               Get MongoDB Collection Count                            ${MDBDB}      ${MDBColl}
-    ${output} =                 Save MongoDB Records        ${MDBDB}                    ${MDBColl}    {"timestamp":1, "msg":"Hello 1"}
+    ${CurCount} =               Get MongoDB Collection Count                            ${MDBDB}               ${MDBColl}
+    ${output} =                 Save MongoDB Records        ${MDBDB}                    ${MDBColl}             {"timestamp":1, "msg":"Hello 1"}
     Log                         ${output}
     Set Suite Variable          ${recordno1}                ${output}
-    ${output} =                 Save MongoDB Records        ${MDBDB}                    ${MDBColl}    {"timestamp":2, "msg":"Hello 2"}
+    ${output} =                 Save MongoDB Records        ${MDBDB}                    ${MDBColl}             {"timestamp":2, "msg":"Hello 2"}
     Log                         ${output}
     Set Suite Variable          ${recordno2}                ${output}
-    ${output} =                 Save MongoDB Records        ${MDBDB}                    ${MDBColl}    {"timestamp":3, "msg":"Hello 3"}
+    ${output} =                 Save MongoDB Records        ${MDBDB}                    ${MDBColl}             {"timestamp":3, "msg":"Hello 3"}
     Log                         ${output}
     Set Suite Variable          ${recordno3}                ${output}
     Comment                     Verify that the record count increased by the number of records saved above (3)
-    ${output} =                 Get MongoDB Collection Count                            ${MDBDB}      ${MDBColl}
+    ${output} =                 Get MongoDB Collection Count                            ${MDBDB}               ${MDBColl}
     Should Be Equal             ${output}                   ${${CurCount} + 3}
     Disconnect From MongoDB
 
@@ -107,11 +107,11 @@ Validate MongoDB Collection
     Connect To MongoDB          ${MDBHost}                  ${MDBPort}
     ${MDBColl} =                Set Variable                foo
     Comment                     Validate a Collection
-    ${allResults} =             Validate MongoDB Collection                             ${MDBDB}      ${MDBColl}
+    ${allResults} =             Validate MongoDB Collection                             ${MDBDB}               ${MDBColl}
     Log                         ${allResults}
     ${MDBColl} =                Set Variable                system.indexes
     Comment                     Validate a Collection
-    ${allResults} =             Validate MongoDB Collection                             ${MDBDB}      ${MDBColl}
+    ${allResults} =             Validate MongoDB Collection                             ${MDBDB}               ${MDBColl}
     Log                         ${allResults}
     Comment                     Disconnect from MongoDB Server
     Disconnect From MongoDB
@@ -120,9 +120,9 @@ Get MongoDB Collection Count
     [Tags]                      regression
     Comment                     Connect to MongoDB Server
     Connect To MongoDB          ${MDBHost}                  ${MDBPort}
-    ${output}                   Get MongoDB Collection Count                            foo           foo
+    ${output}                   Get MongoDB Collection Count                            foo                    foo
     Should Be Equal As Strings                              ${output}                   6
-    Comment                     Should Not Be Equal As Strings                          ${output}     0
+    Comment                     Should Not Be Equal As Strings                          ${output}              0
     Comment                     Disconnect from MongoDB Server
     Disconnect From MongoDB
 
@@ -131,7 +131,7 @@ Retrieve All MongoDB Records
     ${myVar} =                  Set Variable                Blah, Foo, Bar, 4da8713952dfbd08ce000000
     Comment                     Connect to MongoDB Server
     Connect To MongoDB          ${MDBHost}                  ${MDBPort}
-    ${output}                   Retrieve All MongoDB Records                            foo           foo
+    ${output}                   Retrieve All MongoDB Records                            foo                    foo
     Log                         ${output}
     Log                         ${recordNo1}
     Log                         ${recordNo2}
@@ -145,7 +145,7 @@ Retrieve Some MongoDB Records
     [Tags]                      regression
     Comment                     Connect to MongoDB Server
     Connect To MongoDB          ${MDBHost}                  ${MDBPort}
-    ${output}                   Retrieve Some MongoDB Records                           foo           foo                         {"timestamp": {"$gte" : 2}}
+    ${output}                   Retrieve Some MongoDB Records                           foo                    foo                         {"timestamp": {"$gte" : 2}}
     Log                         ${output}
     Should Not Contain          ${output}                   '${recordNo1}'              1
     Should Contain X Times      ${output}                   '${recordNo2}'              1
@@ -159,14 +159,14 @@ Remove MongoDB Records By id
     Comment                     Connect to MongoDB Server
     Connect To MongoDB          ${MDBHost}                  ${MDBPort}
     Comment                     Verify that the record we want to remove exists.
-    ${output}                   Retrieve All MongoDB Records                            ${MDBDB}      ${MDBColl}
+    ${output}                   Retrieve All MongoDB Records                            ${MDBDB}               ${MDBColl}
     Log                         ${output}
     Should Contain              ${output}                   '${recordNo2}'
     Comment                     Remove the record from MongoDB
-    ${output}                   Remove MongoDB Records      ${MDBDB}                    ${MDBColl}    {"_id": "${recordNo2}"}
+    ${output}                   Remove MongoDB Records      ${MDBDB}                    ${MDBColl}             {"_id": "${recordNo2}"}
     Log                         ${output}
     Comment                     Verify that the record was removed from the database.
-    ${output}                   Retrieve All MongoDB Records                            ${MDBDB}      ${MDBColl}
+    ${output}                   Retrieve All MongoDB Records                            ${MDBDB}               ${MDBColl}
     Log                         ${output}
     Should Not Contain          ${output}                   '${recordNo2}'
     Comment                     Disconnect from MongoDB Server
@@ -179,14 +179,14 @@ Remove MongoDB Records
     Comment                     Connect to MongoDB Server
     Connect To MongoDB          ${MDBHost}                  ${MDBPort}
     Comment                     Verify that the record we want to remove exists.
-    ${output}                   Retrieve All MongoDB Records                            ${MDBDB}      ${MDBColl}
+    ${output}                   Retrieve All MongoDB Records                            ${MDBDB}               ${MDBColl}
     Log                         ${output}
     Should Contain              ${output}                   'timestamp', 1
     Comment                     Remove the record from MongoDB
-    ${output}                   Remove MongoDB Records      ${MDBDB}                    ${MDBColl}    {"timestamp": {"$lt": 2}}
+    ${output}                   Remove MongoDB Records      ${MDBDB}                    ${MDBColl}             {"timestamp": {"$lt": 2}}
     Log                         ${output}
     Comment                     Verify that the record was removed from the database.
-    ${output}                   Retrieve All MongoDB Records                            ${MDBDB}      ${MDBColl}
+    ${output}                   Retrieve All MongoDB Records                            ${MDBDB}               ${MDBColl}
     Log                         ${output}
     Should Not Contain          ${output}                   'timestamp', 1
     Comment                     Disconnect from MongoDB Server
@@ -234,9 +234,54 @@ Retrieve Mongodb Records With Desired Fields
     Comment                     Set test data
     ${MDBDB} =                  Set Variable                users
     ${MDBColl} =                Set Variable                account
-    ${output} =                 Save MongoDB Records        ${MDBDB}                    ${MDBColl}    {"firstName": "Clark", "lastName": "Kent", "address": {"streetAddress": "21 2nd Street", "city": "Metropolis"}}
+    ${output} =                 Save MongoDB Records        ${MDBDB}                    ${MDBColl}             {"firstName": "Clark", "lastName": "Kent", "address": {"streetAddress": "21 2nd Street", "city": "Metropolis"}}
     Comment                     Retrieve Mongodb Records With Desired Fields
-    ${fields} =                 Retrieve Mongodb Records With Desired Fields            ${MDBDB}      ${MDBColl}                  {}              address.city    ${false}
+    ${fields} =                 Retrieve Mongodb Records With Desired Fields            ${MDBDB}               ${MDBColl}                  {}                  address.city    ${false}
     Log                         ${fields}
     Should Contain              ${fields}                   city
     Should Contain              ${fields}                   Metropolis
+
+*** Settings ***
+Library                         RobotMongoDBLibrary.Insert
+Library                         RobotMongoDBLibrary.Update
+Library                         RobotMongoDBLibrary.Find
+Library                         RobotMongoDBLibrary.Delete
+
+
+*** Variables ***
+# CONNECT WITH PARAMS
+# &{MONGODB_CONNECT_STRING}     host=127.0.0.1              port=27017                  username=admin         password=password           database=robotdb    collection=customer
+
+# CONNECT WITH CONNECTION STRING CLUSTER
+&{MONGODB_CONNECT_STRING}=      connection=mongodb://admin:password@127.0.0.1:27017,127.0.0.2:27017,127.0.0.3:27017/robotdb?authSource=robotdb                 database=robotdb    collection=customer
+
+
+*** Test Cases ***
+Test insert data into mongodb
+    &{DATA}                     Create Dictionary           _id=X100001                 name=Tarathep          address=Thailand            phone=8888888888
+    ${MSG}                      InsertOne                   ${MONGODB_CONNECT_STRING}                          ${DATA}
+    Should Be Equal             ${MSG}                      INSERTED SUCCESS
+
+
+Test find by fillter data from mongodb
+    &{FILLTER}                  Create Dictionary           name=Tarathep               address=Thailand
+    ${RESULTS}                  Find                        ${MONGODB_CONNECT_STRING}                          ${FILLTER}
+    FOR                         ${RESULT}                   IN                          @{RESULTS}
+        Log To Console          ${RESULT["phone"]}
+    END
+
+
+Test update data phone into mongodb by ID
+    &{NEWDATA}                  Create Dictionary           phone=0649359xxx
+    ${MSG}                      Update                      ${MONGODB_CONNECT_STRING}                          X100001                     ${NEWDATA}
+    Should Be Equal             ${MSG}                      UPDATED SUCCESS
+
+
+Test find data by ID from mongodb
+    ${RESULTS}                  FindOneByID                 ${MONGODB_CONNECT_STRING}                          X100001
+    Log To Console              ${RESULTS}
+
+
+Test delete data by ID into mongodb
+    ${MSG}                      DeleteOneByID               ${MONGODB_CONNECT_STRING}                          X100001
+    Should Be Equal             ${MSG}                      DELETED SUCCESS
