@@ -1,10 +1,11 @@
 *** Settings ***
 Library                         QForce
 Library                         QWeb
-Library                        QVision
+Library                         QVision
+Suite Setup                     OpenBrowser                 about:blank                 chrome
 Suite Teardown                  End suite
 Library                         MongoDBLibrary
-Suite Setup        OpenBrowser    about:blank    chrome
+
 
 Library
 *** Variables ***
@@ -14,7 +15,7 @@ ${MDBPort}                      ${27017}
 *** Test Cases ***
 Connect-Disconnect
     [Tags]                      regression
-     GoTo                       mongodb://localhost:27017     
+    GoTo                        mongodb://localhost:27017
     Comment                     Connect to MongoDB Server
     Connect To MongoDB          mongodb://admin:admin@foo.bar.org                       ${27017}
     Connect To MongoDB          foo.bar.org |               ${27017}
