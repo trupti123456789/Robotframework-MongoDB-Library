@@ -17,8 +17,9 @@ Connect-Disconnect
     [Tags]                      regression
     GoTo                        mongodb://localhost:27017
     Comment                     Connect to MongoDB Server
-    Connect To MongoDB          mongodb://admin:admin@foo.bar.org                       ${27017}
-    Connect To MongoDB          foo.bar.org |               ${27017}
+    #Connect To MongoDB          mongodb://admin:admin@foo.bar.org                       ${27017}
+    Connect To MongoDB          mongodb://admin:admin@Trupti@tr                   ${27017}
+    Connect To MongoDB         Trupti@tr     |               ${27017}
     Connect To MongoDB          ${MDBHost}                  ${MDBPort}
     Comment                     Disconnect from MongoDB Server
     Disconnect From MongoDB
