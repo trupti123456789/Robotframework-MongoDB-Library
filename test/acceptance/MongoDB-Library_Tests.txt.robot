@@ -10,7 +10,7 @@ ${MDBHost}                      localhost
 ${MDBPort}                      27017
 
 *** Test Cases ***
-    [tags]        Mongo
+   
 Connect-Disconnect
     [Tags]                      regression
     Comment                     Connect to MongoDB Server
