@@ -4,9 +4,6 @@ Suite Setup                     Setup Browser
 Suite Teardown                  End suite
 Library                         MongoDB-Library_Tests.txt.robot
 Library                        ../Mongo.robot
-*** Variables ***
-${MDBHost}                      localhost
-${MDBPort}                      ${27017}
 
 *** Test Cases ***
 Connect-Disconnect
