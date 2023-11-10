@@ -6,7 +6,7 @@ Library                         MongoDB-Library_Tests.txt.robot
 Library                        ../Mongo.robot
 *** Variables ***
 ${MDBHost}                      localhost
-${MDBPort}                      ${52010}
+${MDBPort}                      ${27017}
 
 *** Test Cases ***
 Connect-Disconnect
