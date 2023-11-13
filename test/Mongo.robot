@@ -6,7 +6,7 @@ Suite Setup                     OpenBrowser                 about:blank         
 Library                         MongoDBLibrary
 
 
-Library
+
 *** Variables ***
 ${MDBHost}                      localhost
 ${MDBPort}                      ${27017}
