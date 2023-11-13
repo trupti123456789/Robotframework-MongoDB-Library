@@ -18,7 +18,7 @@ Connect-Disconnect
     Comment                     Connect to MongoDB Server
     #Connect To MongoDB          mongodb://admin:admin@foo.bar.org                       ${27017}
     #Connect To MongoDB          mongodb://admin:admin@Trupti@tr                   ${27017}
-    connect to Database          mongodb://admin:admin@Trupti@tr                   ${27017}
+    Connect to Database          mongodb://admin:admin@Trupti@tr                   ${27017}
     Connect To MongoDB         Trupti@tr     |               ${27017}
     Connect To MongoDB          ${MDBHost}                  ${MDBPort}
     Comment                     Disconnect from MongoDB Server
