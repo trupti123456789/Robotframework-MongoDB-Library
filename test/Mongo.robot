@@ -2,11 +2,10 @@
 Library                         QForce
 Library                         QWeb
 Library                         QVision
-Suite Setup                     OpenBrowser                 about:blank                 chrome
-Library                           
-Library                        DatabaseLibrary
-
-
+Library                         MongoDBLibrary
+Library                         DatabaseLibrary
+Suite Setup                     Connect To Database         MongoDB                     ${MDBHost}             ${MDBPort}
+Suite Teardown                  Disconnect From Database
 *** Variables ***
 ${MDBHost}                      localhost
 ${MDBPort}                      ${27017}
@@ -15,14 +14,16 @@ ${MDBPort}                      ${27017}
 Connect-Disconnect
     [Tags]                      regression
     GoTo                        mongodb://localhost:27017
+    Connect To Database         ${MDBHost}                  ${MDBPort}
     Comment                     Connect to MongoDB Server
-    Connect To MongoDB          mongodb://admin:admin@foo.bar.org                       ${27017}
-    #Connect To MongoDB          mongodb://admin:admin@Trupti@tr                   ${27017}
-    Connect to Database          mongodb://admin:admin@Trupti@tr                   ${27017}
-    Connect To MongoDB         Trupti@tr     |               ${27017}
-    Connect To MongoDB          ${MDBHost}                  ${MDBPort}
+    #Connect To MongoDB         mongodb://admin:admin@foo.bar.org                       ${27017}
+    Connect to Database         mongodb://admin:admin@foo.bar.org                       ${27017}
+    Connect To Database         foo.bar.org                 |                           ${27017}
+    Connect To Database         mongodb://admin:admin@Trupti@tr                         ${27017}
+    Connect To Database         Trupti@tr                   |                           ${27017}
+
     Comment                     Disconnect from MongoDB Server
-    Disconnect From MongoDB
+    Disconnect From Database
 
 Get MongoDB Databases
     [Tags]                      regression
