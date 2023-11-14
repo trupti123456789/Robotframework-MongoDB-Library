@@ -5,7 +5,7 @@ Library                         QVision
 Library                         MongoDBLibrary
 Library                         DatabaseLibrary
 Suite Setup             Open Browser    about:blank     chrome
-Suite Teardown                  Disconnect From Database
+
 *** Variables ***
 ${MDBHost}                      localhost
 ${MDBPort}                      ${27017}
