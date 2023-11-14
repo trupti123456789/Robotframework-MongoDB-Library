@@ -4,7 +4,7 @@ Library                         QWeb
 Library                         QVision
 Library                         MongoDBLibrary
 Library                         DatabaseLibrary
-#Suite Setup                     Connect To Database         MongoDB                     ${MDBHost}             ${MDBPort}
+Suite Setup             Open Browser    about:blank     ${BROWSER}
 Suite Teardown                  Disconnect From Database
 *** Variables ***
 ${MDBHost}                      localhost
