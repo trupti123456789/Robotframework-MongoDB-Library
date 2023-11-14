@@ -3,8 +3,8 @@ Library                         QForce
 Library                         QWeb
 Library                         QVision
 Suite Setup                     OpenBrowser                 about:blank                 chrome
-Library                         MongoDBLibrary
-
+Library                           
+Library                        DatabaseLibrary
 
 
 *** Variables ***
