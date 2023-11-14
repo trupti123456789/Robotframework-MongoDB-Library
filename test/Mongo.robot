@@ -4,7 +4,7 @@ Library                         QWeb
 Library                         QVision
 Library                         MongoDBLibrary
 Library                         DatabaseLibrary
-Suite Setup             Open Browser    about:blank     ${BROWSER}
+Suite Setup             Open Browser    about:blank     chrome
 Suite Teardown                  Disconnect From Database
 *** Variables ***
 ${MDBHost}                      localhost
