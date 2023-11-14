@@ -14,7 +14,7 @@ ${MDBPort}                      ${27017}
 Connect-Disconnect
     [Tags]                      regression
     GoTo                        mongodb://localhost:27017
-    Connect To Database         ${MDBHost}                  ${MDBPort}
+    #Connect To Database         ${MDBHost}                  ${MDBPort}
     Comment                     Connect to MongoDB Server
     #Connect To MongoDB         mongodb://admin:admin@foo.bar.org                       ${27017}
     Connect to Database         mongodb://admin:admin@foo.bar.org                       ${27017}
