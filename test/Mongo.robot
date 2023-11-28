@@ -16,7 +16,7 @@ Connect-Disconnect
     Connect To Database         ${MDBHost}                  ${MDBPort}
     Comment                     Connect to MongoDB Server
 #     #Connect To MongoDB         mongodb://admin:admin@foo.bar.org                       ${27017}
-#     Connect to Database         mongodb://admin:admin@foo.bar.org                       ${27017}
+    Connect to Database         mongodb://admin:admin@foo.bar.org                       ${27017}
 #     Connect To Database         foo.bar.org                 |                           ${27017}
 #     Connect To Database         mongodb://admin:admin@Trupti@tr                         ${27017}
 #     Connect To Database         Trupti@tr                   |                           ${27017}
