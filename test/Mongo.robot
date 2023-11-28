@@ -6,12 +6,22 @@ Library                         MongoDBLibrary
 Library                         DatabaseLibrary
 Suite Setup             Open Browser    about:blank     chrome
 
+
 *** Variables ***
-${MDBHost}                      localhost
-${MDBPort}                      ${27017}
+${MDBHost}    localhost
+${MDBPort}    ${27017}
+${MDBUser}    admin
+${MDBPassword}    admin
+${MDBDatabase}   admin
 
 *** Test Cases ***
 Connect-Disconnect
+    [Tags]    regression
+    Connect To Database    ${MDBHost}    ${MDBPort}    ${MDBUser}    ${MDBPassword}    ${MDBDatabase}
+    #Disconnect From MongoDB
+
+*** Test Cases ***
+#Connect-Disconnect
     [Tags]                      regression
     # Connect To Database         ${MDBHost}                  ${MDBPort}
     # Comment                     Connect to MongoDB Server
