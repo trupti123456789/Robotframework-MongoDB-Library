@@ -2,7 +2,7 @@
 Library                         QForce
 Library                         QWeb
 Library                         QVision
-Library                         MongoDBLibrary
+Library                        
 Library                         DatabaseLibrary
 Suite Setup             Open Browser    about:blank     chrome
 
@@ -23,7 +23,7 @@ Connect-Disconnect
 *** Test Cases ***
 #Connect-Disconnect
     [Tags]                      regression
-    # Connect To Database         ${MDBHost}                  ${MDBPort}
+     Connect To Database         ${MDBHost}                  ${MDBPort}
     # Comment                     Connect to MongoDB Server
 #     #Connect To MongoDB         mongodb://admin:admin@foo.bar.org                       ${27017}
     Connect to Database         mongodb://admin:admin@foo.bar.org                       ${27017}
