@@ -8,8 +8,7 @@ Suite Setup                     Open Browser    about:blank     chrome      Read
    
 
 *** Variables ***
-${CONFIG_FILE}     ../Data/config.yaml  
-
+${CONFIG_FILE}     ${CURDIR}/../Data/config.yaml
 *** Keywords ***
 Read Database Config
     #${config}=    LoadConfig   ${CONFIG_FILE}
