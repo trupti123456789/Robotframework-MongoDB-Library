@@ -5,7 +5,7 @@ Library                         QVision
 Library                         DatabaseLibrary
 #Library                         YAMLLibrary
 Suite Setup                     Open Browser    about:blank     chrome      Read Database Config
-   
+Library                         ../libraries/my_yaml_reader.py      ${CURDIR}/../../Data/config.yaml
 
 *** Variables ***
 ${CONFIG_FILE}     ${CURDIR}/../Data/config.yaml
