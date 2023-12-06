@@ -1,7 +1,6 @@
 *** Settings ***
 Library                         QForce
-Library                         QWeb
-Library                        QMobile
+#Library                        QMobile
 Library                         QVision
 Library                         DatabaseLibrary
 #Library                         YAMLLibrary
@@ -13,12 +12,12 @@ ${CONFIG_FILE}     ../Data/config.yaml
 
 *** Keywords ***
 Read Database Config
-    ${config}=    LoadConfig   ${CONFIG_FILE}
-    Set Suite Variable    ${MDBHost}    ${config}[default][MDBHost]
-    Set Suite Variable    ${MDBPort}    ${config}[default][MDBPort]
-    Set Suite Variable    ${MDBUser}    ${config}[default][MDBUser]
-    Set Suite Variable    ${MDBPassword}    ${config}[default][MDBPassword]
-    Set Suite Variable    ${MDBDatabase}    ${config}[default][MDBDatabase]
+    #${config}=    LoadConfig   ${CONFIG_FILE}
+    Set Suite Variable    ${MDBHost}   ${CONFIG_FILE}/[default][MDBHost]
+    Set Suite Variable    ${MDBPort}    ${CONFIG_FILE}/[default][MDBPort]
+    Set Suite Variable    ${MDBUser}   ${CONFIG_FILE}/[default][MDBUser]
+    Set Suite Variable    ${MDBPassword}    ${CONFIG_FILE}/[default][MDBPassword]
+    Set Suite Variable    ${MDBDatabase}   ${CONFIG_FILE}/[default][MDBDatabase]
 
 *** Test Cases ***
 Connect-Disconnect
