@@ -6,10 +6,10 @@ Library                         QVision
 Library                         DatabaseLibrary
 #Library                         YAMLLibrary
 Suite Setup                     Open Browser    about:blank     chrome      Read Database Config
-             
+   
 
 *** Variables ***
-${CONFIG_FILE}    path/to/your/config.yaml
+${CONFIG_FILE}     ../Data/config.yaml  
 
 *** Keywords ***
 Read Database Config
