@@ -1,23 +1,49 @@
 *** Settings ***
 Library                         QForce
 Library                         QWeb
+Library                        QMobile
 Library                         QVision
-Library                        
 Library                         DatabaseLibrary
-Suite Setup             Open Browser    about:blank     chrome 
-
+#Library                         YAMLLibrary
+Suite Setup                     Open Browser    about:blank     chrome      Read Database Config
+             
 
 *** Variables ***
-${MDBHost}    localhost
-${MDBPort}    ${27017}
-${MDBUser}    admin
-${MDBPassword}    admin
-${MDBDatabase}   admin
+${CONFIG_FILE}    path/to/your/config.yaml
+
+*** Keywords ***
+Read Database Config
+    ${config}=    LoadConfig   ${CONFIG_FILE}
+    Set Suite Variable    ${MDBHost}    ${config}[default][MDBHost]
+    Set Suite Variable    ${MDBPort}    ${config}[default][MDBPort]
+    Set Suite Variable    ${MDBUser}    ${config}[default][MDBUser]
+    Set Suite Variable    ${MDBPassword}    ${config}[default][MDBPassword]
+    Set Suite Variable    ${MDBDatabase}    ${config}[default][MDBDatabase]
 
 *** Test Cases ***
 Connect-Disconnect
     [Tags]    regression
     Connect To Database    ${MDBHost}    ${MDBPort}    ${MDBUser}    ${MDBPassword}    ${MDBDatabase}
+# *** Settings ***
+# Library                         QForce
+# Library                         QWeb
+# Library                         QVision
+# Library                        
+# Library                         DatabaseLibrary
+# Suite Setup             Open Browser    about:blank     chrome 
+
+
+# *** Variables ***
+# ${MDBHost}    localhost
+# ${MDBPort}    ${27017}
+# ${MDBUser}    admin
+# ${MDBPassword}    admin
+# ${MDBDatabase}   admin
+
+# *** Test Cases ***
+# Connect-Disconnect
+#     [Tags]    regression
+#     Connect To Database    ${MDBHost}    ${MDBPort}    ${MDBUser}    ${MDBPassword}    ${MDBDatabase}
     #Disconnect From MongoDB
 
 # *** Test Cases ***
