@@ -1,6 +1,13 @@
-default:
-  MDBHost: localhost
-  MDBPort: 27017
-  MDBUser: admin
-  MDBPassword: admin
-  MDBDatabase: admin
+# default:
+#   MDBHost: localhost
+#   MDBPort: 27017
+#   MDBUser: admin
+#   MDBPassword: admin
+#   MDBDatabase: admin
+  {
+    "default": {
+    " MDBHost":" localhost",
+    "MDBPort":"27017"
+    
+    }
+}
