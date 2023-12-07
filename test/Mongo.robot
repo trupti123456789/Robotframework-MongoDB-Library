@@ -22,10 +22,7 @@ Read Database Config
 *** Test Cases ***
 Connect-Disconnect
     [Tags]                 regression
-    ${Json_obj}=         Evaluate                    open('${CURDIR}/../../Data/config.yaml').read()    json
-     ${data1}=            Evaluate                    json.loads('''${Json_obj}''')                    json
-
-     ${data}=             Set Variable                ${data1["default"]}
+  
     Read Database Config
     Connect To Database     ${MDBHost} ${MDBPort} ${MDBUser} ${MDBPassword} ${MDBDatabase}
     #Connect To Database  | mongodb+srv://chaudharytruptisfdc:mongo@123@cluster0.grwdhih.mongodb.net/ | 27017 | 10 | None | <type 'dict'> | False |
