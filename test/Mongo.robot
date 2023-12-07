@@ -9,8 +9,8 @@ Library                    ./lib/python.py             ${CURDIR}/../../Data/conf
 Library                    ./lib/mongoDBlibrary.py     ${MONGO_CONNECTION_STRING}
 *** Variables ***
 ${CONFIG_FILE}             ${CURDIR}/../Data/config.yaml
-${MDBHost}
-${MDBPort}
+${MDBHost}              Set Variable     ${CONFIG_FILE}/[default][MDBHost]
+${MDBPort}               Set Variable        ${CONFIG_FILE}/[default][MDBPort]
 *** Keywords ***
 Read Database Config
     #${config}=            LoadConfig                  ${CONFIG_FILE}
