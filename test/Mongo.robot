@@ -21,8 +21,7 @@ Read Database Config
 *** Test Cases ***
 Connect-Disconnect
     [Tags]    regression
-    Connect To Database    ${MDBHost}    ${MDBPort}    ${MDBUser}    ${MDBPassword}    ${MDBDatabase}
-# *** Settings ***
+    Connect To Database    ${MDBHost} ${MDBPort}
 # Library                         QForce
 # Library                         QWeb
 # Library                         QVision
