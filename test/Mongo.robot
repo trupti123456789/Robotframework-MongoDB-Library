@@ -26,7 +26,7 @@ Connect-Disconnect
     Log                    ${MDBHost}
     ${MDBPort}             Set Variable                 ${CONFIG_FILE}/[default][MDBPort]
     LOg                    ${MDBPort}
-    Connect To Database    ${MDBHost} ${MDBPort}
+    Connect To Database    localhost 27017
     # Library              QForce
     # Library              QWeb
     # Library              QVision
