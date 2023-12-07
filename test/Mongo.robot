@@ -5,8 +5,8 @@ Library                         QVision
 Library                         DatabaseLibrary
 #Library                         YAMLLibrary
 Suite Setup                     Open Browser    about:blank     chrome      Read Database Config
-Library                          ../lib/MyYAMLReader.py       ${CURDIR}/../../Data/config.yaml
-Library                            ../lib/mongoDBlibrary.py    ${MONGO_CONNECTION_STRING}
+Library                          ./lib/python.py       ${CURDIR}/../../Data/config.yaml
+Library                            ./lib/mongoDBlibrary.py    ${MONGO_CONNECTION_STRING}
 *** Variables ***
 ${CONFIG_FILE}     ${CURDIR}/../Data/config.yaml
 *** Keywords ***
