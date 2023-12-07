@@ -15,6 +15,7 @@ ${MDBPort}
 Read Database Config
     #${config}=            LoadConfig                  ${CONFIG_FILE}
     Set Variable           ${MDBHost}                  ${CONFIG_FILE}/[default][MDBHost]
+    log                    ${MDBHost}
     Set Variable           ${MDBPort}                  ${CONFIG_FILE}/[default][MDBPort]
     Set Suite Variable     ${MDBUser}                  ${CONFIG_FILE}/[default][MDBUser]
     Set Suite Variable     ${MDBPassword}              ${CONFIG_FILE}/[default][MDBPassword]
