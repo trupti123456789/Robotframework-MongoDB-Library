@@ -22,12 +22,9 @@ Read Database Config
 *** Test Cases ***
 Connect-Disconnect
     [Tags]                 regression
-    ${MDBHost}             Set Variable                 ${CONFIG_FILE}/[default][MDBHost]
-    Log                    ${MDBHost}
-    ${MDBPort}             Set Variable                 ${CONFIG_FILE}/[default][MDBPort]
-    LOg                    ${MDBPort}
-    #Connect To Database    localhost 27017
-    Connect To Database  | mongodb+srv://chaudharytruptisfdc:mongo@123@cluster0.grwdhih.mongodb.net/ | 27017 | 10 | None | <type 'dict'> | False |
+    Read Database Config
+    Connect To Database    ${MDBHost} ${MDBPort}
+    #Connect To Database  | mongodb+srv://chaudharytruptisfdc:mongo@123@cluster0.grwdhih.mongodb.net/ | 27017 | 10 | None | <type 'dict'> | False |
     # Library              QForce
     # Library              QWeb
     # Library              QVision
