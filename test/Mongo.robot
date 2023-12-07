@@ -23,7 +23,7 @@ Read Database Config
 Connect-Disconnect
     [Tags]                 regression
     Read Database Config
-    Connect To Database    ${MDBHost} ${MDBPort}
+    Connect To Database     ${MDBHost} ${MDBPort} ${MDBUser} ${MDBPassword} ${MDBDatabase}
     #Connect To Database  | mongodb+srv://chaudharytruptisfdc:mongo@123@cluster0.grwdhih.mongodb.net/ | 27017 | 10 | None | <type 'dict'> | False |
     # Library              QForce
     # Library              QWeb
