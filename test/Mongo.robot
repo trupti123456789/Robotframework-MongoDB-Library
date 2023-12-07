@@ -9,14 +9,12 @@ Library                    ./lib/python.py             ${CURDIR}/../../Data/conf
 Library                    ./lib/mongoDBlibrary.py     ${MONGO_CONNECTION_STRING}
 *** Variables ***
 ${CONFIG_FILE}             ${CURDIR}/../Data/config.yaml
-${MDBHost}              Set Variable     ${CONFIG_FILE}/[default][MDBHost]
-${MDBPort}               Set Variable        ${CONFIG_FILE}/[default][MDBPort]
+
 *** Keywords ***
 Read Database Config
     #${config}=            LoadConfig                  ${CONFIG_FILE}
-    Set Variable           ${MDBHost}                  ${CONFIG_FILE}/[default][MDBHost]
-    log                    ${MDBHost}
-    Set Variable           ${MDBPort}                  ${CONFIG_FILE}/[default][MDBPort]
+    Set Suite Variable      ${MDBHost}                  ${CONFIG_FILE}/[default][MDBHost]
+    Set Suite Variable     ${MDBPort}                  ${CONFIG_FILE}/[default][MDBPort]
     Set Suite Variable     ${MDBUser}                  ${CONFIG_FILE}/[default][MDBUser]
     Set Suite Variable     ${MDBPassword}              ${CONFIG_FILE}/[default][MDBPassword]
     Set Suite Variable     ${MDBDatabase}              ${CONFIG_FILE}/[default][MDBDatabase]
@@ -24,6 +22,10 @@ Read Database Config
 *** Test Cases ***
 Connect-Disconnect
     [Tags]                 regression
+    ${MDBHost}             Set Variable                 ${CONFIG_FILE}/[default][MDBHost]
+    Log                    ${MDBHost}
+    ${MDBPort}             Set Variable                 ${CONFIG_FILE}/[default][MDBPort]
+    LOg                    ${MDBPort}
     Connect To Database    ${MDBHost} ${MDBPort}
     # Library              QForce
     # Library              QWeb
